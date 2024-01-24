@@ -38,8 +38,13 @@ public class LinkCommands {
 
     public static int link(CommandSourceStack source, ServerPlayer player1, ServerPlayer player2) {
         player1.setData(AttachmentsRegistry.MANA, player2.getUUID().toString());
+        if(player2 == null) {
+            source.getPlayer().sendSystemMessage(Component.translatable("linked.commands.no_link", player2.getDisplayName().getString()));
+            return 0;
+        }
         player2.setData(AttachmentsRegistry.MANA, player1.getUUID().toString());
-        source.getPlayer().sendSystemMessage(Component.literal("§aLe joueur " + player1.getDisplayName().getString() + " est maintenant lié à " + player2.getDisplayName().getString() + "."));
+
+        source.getPlayer().sendSystemMessage(Component.translatable("linked.commands.link", player1.getDisplayName().getString() ,player2.getDisplayName().getString()));
 
 
         return 0;
@@ -48,12 +53,13 @@ public class LinkCommands {
         String test = player.getData(AttachmentsRegistry.MANA);
         Player linkedPlayer = player.level().getPlayerByUUID(UUID.fromString(test));
         if(linkedPlayer == null) {
-            source.getPlayer().sendSystemMessage(Component.literal("§aLe joueur " + player.getDisplayName().getString() + " n'est pas lié ou son lien n'est pas connecté."));
+            source.getPlayer().sendSystemMessage(Component.translatable("linked.commands.no_link", player.getDisplayName().getString()));
             return 0;
         }
 
+        linkedPlayer.setData(AttachmentsRegistry.MANA, linkedPlayer.getUUID().toString());
         player.setData(AttachmentsRegistry.MANA, player.getUUID().toString());
-        source.getPlayer().sendSystemMessage(Component.literal("§aVotre lien à été supprimé."));
+        source.getPlayer().sendSystemMessage(Component.translatable("linked.commands.unlink", player.getDisplayName().getString()));
 
 
         return 0;
@@ -63,10 +69,10 @@ public class LinkCommands {
         String test = player.getData(AttachmentsRegistry.MANA);
         Player linkedPlayer = player.level().getPlayerByUUID(UUID.fromString(test));
         if(linkedPlayer == null || linkedPlayer.getUUID() == player.getUUID()) {
-            source.getPlayer().sendSystemMessage(Component.literal("§aLe joueur " + player.getDisplayName().getString() + " n'est pas lié ou son lien n'est pas connecté."));
+            source.getPlayer().sendSystemMessage(Component.translatable("linked.commands.no_link", player.getDisplayName().getString()));
             return 0;
         }
-        source.getPlayer().sendSystemMessage(Component.literal("§aLe lien de " + player.getDisplayName().getString() + " est " + linkedPlayer.getDisplayName().getString() + "."));
+        source.getPlayer().sendSystemMessage(Component.translatable("linked.commands.getlink", player.getDisplayName().getString(), linkedPlayer.getDisplayName().getString() ));
 
 
         return 0;

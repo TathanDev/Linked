@@ -3,6 +3,7 @@ package fr.tathan.linked.util;
 import fr.tathan.linked.registry.AttachmentsRegistry;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Methods {
@@ -26,5 +27,9 @@ public class Methods {
         } else {
             return new LinkInfos(player, linkedPlayer);
         }
+    }
+
+    public static boolean playersAreLinked(Player player1, Player player2){
+        return Objects.equals(player1.getData(AttachmentsRegistry.MANA), player2.getUUID().toString());
     }
 }

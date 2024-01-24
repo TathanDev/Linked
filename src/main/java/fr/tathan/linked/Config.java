@@ -22,10 +22,15 @@ public class Config
     private static final ModConfigSpec.BooleanValue DIE_WITH_PARTNER = BUILDER
             .comment("Should the player die when his partner dies ?")
             .define("dieWithPartner", true);
+    private static final ModConfigSpec.BooleanValue SHARE_EFFECTS = BUILDER
+            .comment("Should the player share his effects with his link ?")
+            .define("shareEffects", true);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public static boolean dieWithPartner;
+    public static boolean shareEffects;
+
 
     private static boolean validateItemName(final Object obj)
     {
@@ -36,5 +41,6 @@ public class Config
     static void onLoad(final ModConfigEvent event)
     {
         dieWithPartner = DIE_WITH_PARTNER.get();
+        shareEffects = SHARE_EFFECTS.get();
     }
 }

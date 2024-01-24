@@ -1,0 +1,8 @@
+{
+  "death.attack.love": "%1$s is dead because of Love !",
+  "linked.commands.no_link": "§aThe player %s§a has no link or his link is not connected",
+  "linked.commands.link": "§aThe player %s§a is now link to %s",
+  "linked.commands.unlink": "§aThe link of %s§a has been deleted !",
+
+  "linked.commands.getlink": "§aThe link of %s§a is %s§a!"
+}
